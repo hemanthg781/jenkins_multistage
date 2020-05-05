@@ -1,18 +1,18 @@
 pipeline {
       agent any
       stages {
-            stage('Init') {
+            stage('DEV') {
                   steps {
                         echo 'Hi Hemanth, this is DEV Stage'
                         
                   }
             }
-            stage('Build') {
+            stage('UAT') {
                   steps {
                         echo 'Hi Hemanth, this is UAT Stage'
                   }
             }
-            stage('Deploy') {
+            stage('PROD') {
                   steps {
                         echo "Hi Hemanth, this is PROD Stage"
                   }
