@@ -22,5 +22,17 @@ pipeline {
                         echo "Deploying in Production Area"
                   }
             }
+            
+            stage('Publish') {
+                   when {
+                         branch 'master'
+                        }
+                   steps {
+                          withDockerRegistry([ credentialsId: "dockerlogin", url: "" ]) {
+                          sh 'docker push hemanthg781/terraform:latest'
+                          sh 'docker push hemanthg781/cli:latest'
+        }
+      }
+    }
       }
 }
