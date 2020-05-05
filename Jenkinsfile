@@ -3,23 +3,18 @@ pipeline {
       stages {
             stage('Init') {
                   steps {
-                        echo 'Hi, this is Hemanth'
+                        echo 'Hi Hemanth, this is DEV Stage'
                         
                   }
             }
             stage('Build') {
                   steps {
-                        echo 'Building Sample Maven Project'
+                        echo 'Hi Hemanth, this is UAT Stage'
                   }
             }
             stage('Deploy') {
                   steps {
-                        echo "Deploying in Staging Area"
-                  }
-            }
-            stage('Deploy Production') {
-                  steps {
-                        echo "Deploying in Production Area"
+                        echo "Hi Hemanth, this is PROD Stage"
                   }
             }
             
