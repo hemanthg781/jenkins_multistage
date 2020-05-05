@@ -30,4 +30,10 @@ pipeline {
       }
     }
       }
+      
+      post {
+        always {
+            emailext body: 'A Test EMail - Build is success', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
 }
