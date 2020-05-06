@@ -6,6 +6,13 @@ pipeline {
                         echo 'Hi Hemanth, this is DEV Stage'
                         
                   }
+                  stage('DEV1') {
+                  steps {
+                        echo 'Hi Hemanth, this is DEV1 Stage'
+                        
+                  }
+                  
+         
             }
             stage('UAT') {
                   steps {
