@@ -1,15 +1,17 @@
 pipeline {
-    agent none
+    agent any
 
     stages {
         stage("build and test the project") {
-            agent {
-                docker "our-build-tools-image"
-            }
-            stages {
-               stage("build") {
+            stage("build") {
                    steps {
                        echo 'Hi Hemanth, this is build Stage'
+                   }
+               }
+            stages {
+               stage("build1") {
+                   steps {
+                       echo 'Hi Hemanth, this is build1 Stage'
                    }
                }
                stage("test") {
