@@ -1,46 +1,40 @@
 pipeline {
-      agent any
-      stages {
-            stage('DEV') {
-                  steps {
-                        echo 'Hi Hemanth, this is DEV Stage'
-                        
-                  }
-                  stage('DEV1') {
-                  steps {
-                        echo 'Hi Hemanth, this is DEV1 Stage'
-                        
-                  }
-                  }
-         
+    agent none
+
+    stages {
+        stage("build and test the project") {
+            agent {
+                docker "our-build-tools-image"
             }
-            stage('UAT') {
-                  steps {
-                        echo 'Hi Hemanth, this is UAT Stage'
-                  }
-            }
-            stage('PROD') {
-                  steps {
-                        echo "Hi Hemanth, this is PROD Stage"
-                  }
-            }
-            
-            stage('Publish') {
-                   when {
-                         branch 'master'
-                        }
+            stages {
+               stage("build") {
                    steps {
-                          withDockerRegistry([ credentialsId: "dockerlogin", url: "" ]) {
-                          sh 'docker push hemanthg781/terraform:latest'
-                          sh 'docker push hemanthg781/cli:latest'
+                       echo 'Hi Hemanth, this is build Stage'
+                   }
+               }
+               stage("test") {
+                   steps {
+                      echo 'Hi Hemanth, this is test Stage'
+                   }
+               }
+            }
+            post {
+                success {
+                    stash name: "artifacts", includes: "artifacts/**/*"
+                }
+            }
         }
-      }
-    }
-      }
-      
-      post {
-        always {
-            emailext body: 'A Test EMail - Build is success', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+
+        stage("deploy the artifacts if a user confirms") {
+            input {
+                message "Should we deploy the project?"
+            }
+            agent {
+                docker "our-deploy-tools-image"
+            }
+            steps {
+                echo 'Hi Hemanth, this is deploy Stage'
+            }
         }
     }
 }
