@@ -11,7 +11,7 @@ pipeline {
                         echo 'Hi Hemanth, this is DEV1 Stage'
                         
                   }
-                  
+                  }
          
             }
             stage('UAT') {
