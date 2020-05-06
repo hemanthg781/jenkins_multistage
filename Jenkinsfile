@@ -27,16 +27,5 @@ pipeline {
             }
         }
 
-        stage("deploy the artifacts if a user confirms") {
-            input {
-                message "Should we deploy the project?"
             }
-            agent {
-                docker "our-deploy-tools-image"
-            }
-            steps {
-                echo 'Hi Hemanth, this is deploy Stage'
-            }
-        }
-    }
 }
