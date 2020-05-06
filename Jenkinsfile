@@ -6,7 +6,7 @@ pipeline {
             parallel {
                 stage("windows") {
                     agent {
-                        label "any"
+                        label "master"
                     }
                     stages {
                         stage("build") {
@@ -27,7 +27,7 @@ pipeline {
 
                 stage("linux") {
                     agent {
-                        label "any"
+                        label "master"
                     }
                     stages {
                         stage("build") {
